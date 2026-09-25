@@ -1,8 +1,8 @@
 // Stretch: add a start screen
 // Paddle Variables
 let paddleWidth = 20;
-let paddleHeight = 120;
-let paddleSpeed = 8;
+let paddleHeight = 90;
+let paddleSpeed = 10;
 let leftPaddle, rightPaddle;
 
 // Ball Variables
@@ -17,7 +17,7 @@ let timerDuration = 3000;
 let winner;
 let leftScore = 0;
 let rightScore = 0;
-let winCondition = 11;
+let winCondition = 3;
 
 let areaPadding = 20;
 let gameState = "playing";
@@ -29,6 +29,9 @@ let backgroundHeight = 360;
 let backgroundSpeed = .5;
 let background = [];
 
+// Text Variables
+let fontFlappy;
+
 async function setup() {
   createCanvas(backgroundWidth, backgroundHeight);
   noStroke();
@@ -36,7 +39,10 @@ async function setup() {
   birdSprite = await loadImage("Sprites/Bird.png");
   leftPipeSprite = await loadImage("Sprites/LeftPipe.png");
   rightPipeSprite = await loadImage("Sprites/RightPipe.png");
-  backgroundSprite = await loadImage("Sprites/PongLandscape.png")
+  backgroundSprite = await loadImage("Sprites/PongLandscape.png");
+  fontFlappy = await loadFont("Fonts/FlappyBirdRegular-9Pq0.ttf");
+
+  textFont(fontFlappy);
 
   leftPaddle = new Paddle(
     areaPadding + paddleWidth,
@@ -102,14 +108,16 @@ function handleWinner() {
 }
 
 function gameOver() {
-  let gameOverSize = 25;
-  let resetSize = 10;
-  let fontPadding = 20;
+  let gameOverSize = 50;
+  let resetSize = 25;
+  let fontPadding = 40;
 
   push();
+  fill(255);
+  stroke(0);
+  strokeWeight(5);
   textAlign(CENTER, CENTER);
   textSize(gameOverSize);
-  fill(200);
   text("GAMEOVER. " + winner + " WON!", width / 2, height / 2);
   textSize(resetSize);
   text("PRESS R TO PLAY AGAIN.", width / 2, height / 2 + fontPadding);
@@ -138,8 +146,10 @@ function timer() {
   }
 
   push();
-  textAlign(CENTER, CENTER);
   fill(255);
+  stroke(0);
+  strokeWeight(5);
+  textAlign(CENTER, CENTER);
   textSize(fontSize);
   text(timerText, width / 2, height / 2);
   pop();
@@ -312,32 +322,27 @@ class Background {
 }
 
 /* ----------------- UI Helpers ----------------- */
-function drawCourt() {
-  stroke(80);
-  strokeWeight(2);
-  for (let y = 10; y < height; y += 18) {
-    line(width / 2, y, width / 2, y + 8);
-  }
-  noStroke();
-}
-
 function handleText() {
   let textY = 50;
-  let scoreSize = 25;
+  let scoreSize = 50;
 
   push();
+  fill(255);
+  stroke(0);
+  strokeWeight(5);
   textAlign(CENTER, CENTER);
   textSize(scoreSize);
-  fill(255);
-  text(leftScore, width / 4, textY);
-  text(rightScore, (3 * width) / 4, textY);
+  text(leftScore, width / 5, textY);
+  text(rightScore, (4 * width) / 5, textY);
   pop();
 
-  let conditionSize = 10;
+  let conditionSize = 25;
   push();
+  fill(255);
+  stroke(0);
+  strokeWeight(5);
   textAlign(CENTER, CENTER);
   textSize(conditionSize);
-  fill(255);
-  text("SCORE 11 TIMES TO WIN THE GAME", width / 2, textY);
+  text("SCORE " + winCondition + " TIMES TO WIN THE GAME", width / 2, textY);
   pop();
 }
