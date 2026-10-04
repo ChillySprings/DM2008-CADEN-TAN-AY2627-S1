@@ -32,6 +32,9 @@ let background = [];
 // Text Variables
 let fontFlappy;
 
+// Sound Variables
+let bgm, sfxHit, sfxScore, sfxGameOver;
+
 async function setup() {
   createCanvas(backgroundWidth, backgroundHeight);
   noStroke();
@@ -40,7 +43,16 @@ async function setup() {
   leftPipeSprite = await loadImage("Sprites/LeftPipe.png");
   rightPipeSprite = await loadImage("Sprites/RightPipe.png");
   backgroundSprite = await loadImage("Sprites/PongLandscape.png");
+
   fontFlappy = await loadFont("Fonts/FlappyBirdRegular-9Pq0.ttf");
+
+  bgm = await loadSound("Sounds/MainTheme.mp3");
+  sfxHit = await loadSound("Sounds/sfx_wing.mp3");
+  sfxScore = await loadSound("Sounds/sfx_point.mp3");
+  sfxGameOver = await loadSound("Sounds/sfx_die.mp3");
+
+  bgm.loop(true);
+  bgm.play();
 
   textFont(fontFlappy);
 
@@ -96,6 +108,7 @@ function draw() {
 
 function handleWinner() {
   if (leftScore < winCondition && rightScore < winCondition) {
+    sfxScore.play();
     nextRound();
   } else {
     if ((leftScore = winCondition)) {
@@ -103,6 +116,7 @@ function handleWinner() {
     } else {
       winner = "RIGHT PLAYER";
     }
+    sfxGameOver.play();
     gameState = "gameover";
   }
 }
@@ -277,6 +291,8 @@ class Ball {
       this.velocity.y +=
         (this.position.y - paddle.position.y - paddle.height / 2) * 0.1;
       this.rotationSpeed += 10;
+
+      sfxHit.play();
     }
   }
 
