@@ -1,62 +1,24 @@
-# Mini Project — Title
-
-<!-- Replace "Title" with the name of your project, e.g. "Mini Project — Pong Remix" -->
-
----
+# Mini Project — Flappy Pong
 
 ### The Project
+Recreated a simple Pong-style game using OOP principles.
+Each paddle and ball is a class with its own properties and methods.
+Aesthetics and sounds are a parody of the original Flappy Bird game.
+The moving landscape is also a class with its own properties and methods.
 
-<!-- What did you build and what makes it yours? A few sentences is enough.
-     What did you change, add, or push beyond the scaffold? -->
-
----
-
-### Output
-
-![screenshot](readme-assets/screenshot-01.png)
-
-<!-- Drop a screenshot or GIF of your finished project.
-     Save it to a readme-assets/ folder inside this project folder.
-     Got more than one good screenshot? Add them. -->
-
-[Watch Online](https://your-link-here)
-
-<!-- Replace the link above with a URL to a screen recording or video of your project.
-     ⚠️ Make sure the file or page is set to public before submitting. -->
-
----
+### Features
+- Aesthetics and sounds based on the original Flappy Bird Game.
+- Collision detection using `dist()`.
+- Score tracking and game-over states.
+- Timer countdown once win condition has been met.
+- Player controls via `W/S` and `↑/↓` keys.
+- Game is reset via `R` key.
 
 ### ✍️ Reflection
+I initially just set out to accomplish the necessary goals and later added some of the optional goals. I had already coded Pong by myself on Javascript before using this template, but I used this template for Flappy Pong just to see what Kapi did differently.
 
-<!-- 200–300 words on your process. Write freely — this isn't an essay.
-     Some prompts to get you started:
-     — What did you set out to make, and how did the result compare?
-     — What inputs does your sketch respond to, and how did you approach that?
-     — What was your biggest challenge, and how did you work through it?
-     — What would you push further if you had more time? -->
+His input controls were placed outside of the classes because input controls apparently do not work well simultaneously in a class. Other than the `W/S` and `↑/↓` keys for movement control, the `R` key allows the game to be reset once one of the players have won. I approached the latter by creating a "gameover" state that switches to the "waiting" state after the key has been pressed, resulting in a timer. 
 
----
+I'd say since I had already coded Pong beforehand, there weren't any new challenges faced while coding this as most of the code was already provided in the template. While coding my original Pong though, the most difficult challenge was the timer and the states system, as I didn't have those originally. They initially were booleans. I was also unfamiliar with the timer logic as I was more used to C#'s Coroutines. The timer logic works based on saving the startTime once the `R` key has been pressed and using that to calculate elapsed (millis - startTime) against timerDuration.
 
-<!-- ─────────────────────────────────────────────────────
-     GOING FURTHER — want to document more? Try any of these:
-
-     ### ✨ What I Changed
-     A short list of the additions and modifications you made to the scaffold.
-     - Changed the paddle to use mouse tracking instead of keyboard
-     - Redesigned the visual language with a retro CRT aesthetic
-
-     ### 🔍 Code Structure
-     Briefly explain how your files are organised.
-     - `sketch.js` — main game loop
-     - `Ball.js` — ball class with collision logic
-     - `assets/` — sprites and sounds
-
-     ### 🧩 Something I'm Proud Of
-     A snippet of code, a design decision, a moment where it clicked.
-     ```js
-     // your code here
-     ```
-
-     ### 🔗 References
-     Anything that helped or inspired you — tutorials, artworks, tools.
-     ───────────────────────────────────────────────────── -->
+Honestly, another challenge was just not getting bored. Since I had already recreated Pong, I wanted to move on to other projects already. However, I decided to add aesthetics and a new Background class just to do something new. I still want to work on other things though. If I didn't eventually get bored, I would have added a Start Menu.
